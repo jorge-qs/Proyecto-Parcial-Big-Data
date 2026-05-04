@@ -1,0 +1,120 @@
+26/05/04 00:12:04 INFO SparkEnv: Registering MapOutputTracker
+26/05/04 00:12:04 INFO SparkEnv: Registering BlockManagerMaster
+26/05/04 00:12:05 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/05/04 00:12:05 INFO SparkEnv: Registering OutputCommitCoordinator
+26/05/04 00:12:06 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
+26/05/04 00:12:06 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/05/04 00:12:06 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+26/05/04 00:12:06 INFO DataprocSparkPlugin: Registered 189 driver metrics
+26/05/04 00:12:06 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at chicago-crimes-3-m.us-central1-b.c.my-first-project-492901.internal./10.128.0.46:8032
+26/05/04 00:12:07 INFO AHSProxy: Connecting to Application History server at chicago-crimes-3-m.us-central1-b.c.my-first-project-492901.internal./10.128.0.46:10200
+26/05/04 00:12:07 INFO Configuration: resource-types.xml not found
+26/05/04 00:12:07 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+26/05/04 00:12:08 INFO YarnClientImpl: Submitted application application_1777852442551_0004
+26/05/04 00:12:09 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at chicago-crimes-3-m.us-central1-b.c.my-first-project-492901.internal./10.128.0.46:8030
+26/05/04 00:12:10 INFO GhfsGlobalStorageStatistics: periodic connector metrics: {gcs_api_client_non_found_response_count=1, gcs_api_client_side_error_count=1, gcs_api_time=243, gcs_api_total_request_count=2, gcs_connector_time=420, gcs_list_file_request=1, gcs_list_file_request_duration=128, gcs_list_file_request_max=128, gcs_list_file_request_mean=128, gcs_list_file_request_min=128, gcs_metadata_request=1, gcs_metadata_request_duration=115, gcs_metadata_request_max=115, gcs_metadata_request_mean=115, gcs_metadata_request_min=115, gs_filesystem_create=3, gs_filesystem_initialize=2, op_get_file_status=1, op_get_file_status_duration=420, op_get_file_status_max=420, op_get_file_status_mean=420, op_get_file_status_min=420, uptimeSeconds=4} [CONTEXT ratelimit_period="5 MINUTES" ]
+26/05/04 00:12:10 INFO GoogleCloudStorageImpl: Ignoring exception of type GoogleJsonResponseException; verified object already exists with desired state.
+26/05/04 00:12:11 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-1066162718629-sssgppcu/36ee7e35-5d9f-4cef-9459-d84a413f1a38/spark-job-history/application_1777852442551_0004.inprogress [CONTEXT ratelimit_period="1 MINUTES" ]
+
+============================================================
+Spark 3.5.3
+Master:   yarn
+App ID:   application_1777852442551_0004
+Cores:    2
+============================================================
+
+[Stage 0:>                                                          (0 + 4) / 4][Stage 0:==============>                                            (1 + 3) / 4][Stage 0:=============================>                             (2 + 2) / 4][Stage 0:============================================>              (3 + 1) / 4]                                                                                Fuente:              GCS nativo — gs://big-data-proyecto-parcial/raw/
+Registros:           2,072,943  (23.2s)
+Años:                [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+Cores en paralelo:   4
+Executors activos:   0
+Hosts de executors:  ['Expecting value: line 1 column 1 (char 0)']
+
+--- CRUD 1: CREATE arrests_by_year ---
+[Stage 4:=============================>                             (2 + 2) / 4]                                                                                +----+---------+------------+-------------+---------------+
+|year|covid_era|total_crimes|total_arrests|arrest_rate_pct|
++----+---------+------------+-------------+---------------+
+|2017|      PRE|      269214|        52670|          19.56|
+|2018|      PRE|      269070|        53901|          20.03|
+|2019|      PRE|      261555|        56256|          21.51|
+|2020|  DURANTE|      212522|        34158|          16.07|
+|2021|  DURANTE|      209406|        26558|          12.68|
+|2022|  DURANTE|      239655|        28074|          11.71|
+|2023|     POST|      262756|        31843|          12.12|
+|2024|     POST|      256305|        34502|          13.46|
+|2025|     POST|       92460|        15117|          16.35|
++----+---------+------------+-------------+---------------+
+
+  → BigQuery: chicago_crimes_results.arrests_by_year  (9 filas)
+--- CRUD 2: READ crimes_by_district ---
+Top 5 áreas por era:
+26/05/04 00:12:45 INFO RequestTracker: Detected high latency for [url=https://storage.googleapis.com/storage/v1/b/dataproc-temp-us-central1-1066162718629-sssgppcu/o/36ee7e35-5d9f-4cef-9459-d84a413f1a38%2Fspark-job-history%2Fapplication_1777852442551_0004.inprogress/compose?ifGenerationMatch=1777853559438616; invocationId=gl-java/11.0.30 gdcl/2.7.2 linux/6.1.0 gccl-invocation-id/6080c931]. durationMs=277; method=POST; thread=spark-listener-group-eventLog [CONTEXT ratelimit_period="10 SECONDS" ]
+26/05/04 00:12:45 INFO GhfsGlobalStorageStatistics: Detected potential high latency for operation op_hflush. latencyMs=614; previousMaxLatencyMs=351; operationCount=66; context=gs://dataproc-temp-us-central1-1066162718629-sssgppcu/36ee7e35-5d9f-4cef-9459-d84a413f1a38/spark-job-history/application_1777852442551_0004.inprogress; thread=spark-listener-group-eventLog
++--------+------------+---------------+
+|district|total_crimes|arrest_rate_pct|
++--------+------------+---------------+
+|      25|       45474|          25.36|
+|       8|       38067|          16.99|
+|      32|       32144|          15.74|
+|      28|       27944|          15.61|
+|      29|       27611|          38.92|
++--------+------------+---------------+
+only showing top 5 rows
+
++--------+------------+---------------+
+|district|total_crimes|arrest_rate_pct|
++--------+------------+---------------+
+|      25|       36802|          16.79|
+|       8|       26350|           13.4|
+|      43|       23617|          10.76|
+|      28|       23000|          10.21|
+|      29|       20688|          24.04|
++--------+------------+---------------+
+only showing top 5 rows
+
++--------+------------+---------------+
+|district|total_crimes|arrest_rate_pct|
++--------+------------+---------------+
+|      25|       30504|          16.97|
+|       8|       26511|           15.5|
+|      28|       25099|           9.92|
+|      32|       21277|          20.55|
+|      43|       20405|          10.31|
++--------+------------+---------------+
+only showing top 5 rows
+
+  → BigQuery: chicago_crimes_results.crimes_by_district  (231 filas)
+--- CRUD 3: READ monthly_trend ---
+[Stage 37:=============================>                            (2 + 2) / 4][Stage 37:===========================================>              (3 + 1) / 4]                                                                                Puntos temporales: 102
+  → BigQuery: chicago_crimes_results.monthly_trend  (102 filas)
+--- CRUD 4: UPDATE weekend_analysis ---
+[Stage 51:>                                                         (0 + 4) / 4][Stage 51:==============>                                           (1 + 3) / 4][Stage 56:>                                                         (0 + 1) / 1]                                                                                +---------+----------+------------+-------------+---------------+----------------+
+|covid_era|is_weekend|total_crimes|total_arrests|arrest_rate_pct|pct_of_era_total|
++---------+----------+------------+-------------+---------------+----------------+
+|  DURANTE|      true|      190638|        26393|          13.84|           28.82|
+|  DURANTE|     false|      470945|        62397|          13.25|           71.18|
+|     POST|      true|      176901|        23446|          13.25|           28.93|
+|     POST|     false|      434620|        58016|          13.35|           71.07|
+|      PRE|      true|      228097|        47333|          20.75|           28.52|
+|      PRE|     false|      571742|       115494|           20.2|           71.48|
++---------+----------+------------+-------------+---------------+----------------+
+
+[Stage 57:>                                                         (0 + 4) / 4][Stage 57:=============================>                            (2 + 2) / 4][Stage 62:>                                                         (0 + 1) / 1]                                                                                  → BigQuery: chicago_crimes_results.weekend_analysis  (6 filas)
+--- CRUD 5: DELETE registros inválidos ---
+Total registros: 2,072,943
+26/05/04 00:13:11 INFO GoogleHadoopOutputStream: hflush(): No-op due to rate limit (RateLimiter[stableRate=0.2qps]): readers will *not* yet see flushed data for gs://dataproc-temp-us-central1-1066162718629-sssgppcu/36ee7e35-5d9f-4cef-9459-d84a413f1a38/spark-job-history/application_1777852442551_0004.inprogress [CONTEXT ratelimit_period="1 MINUTES [skipped: 219]" ]
+[Stage 70:>                                                         (0 + 4) / 4][Stage 70:>                 (0 + 4) / 4][Stage 71:>                 (0 + 0) / 4][Stage 70:=============>    (3 + 1) / 4][Stage 71:>                 (0 + 3) / 4][Stage 71:>                                                         (0 + 4) / 4][Stage 71:===========================================>              (3 + 1) / 4]                                                                                +---------+------+---------------+-----------+
+|covid_era| total|invalid_records|pct_invalid|
++---------+------+---------------+-----------+
+|  DURANTE|661583|              0|        0.0|
+|     POST|611521|              0|        0.0|
+|      PRE|799839|              0|        0.0|
++---------+------+---------------+-----------+
+
+[Stage 75:>                                                         (0 + 4) / 4][Stage 75:===========================================>              (3 + 1) / 4]                                                                                Registros válidos: 2,072,943
+
+============================================================
+Todos los CRUDs completados. Resultados en BigQuery.
+Tiempo total: 63.3s
+============================================================
+26/05/04 00:13:15 INFO DataprocSparkPlugin: Shutting down driver plugin. metrics=[action_http_patch_request=0, files_created=1, gcs_api_server_timeout_count=0, op_get_list_status_result_size=9, op_open=0, action_http_delete_request=10, gcs_api_time=7390, gcs_backoff_count=0, gcs_api_client_unauthorized_response_count=0, stream_read_close_operations=0, stream_read_bytes_backwards_on_seek=0, gs_filesystem_create=4, exception_count=0, gcs_exception_count=0, gcs_api_total_request_count=133, op_create=1, stream_read_vectored_operations=0, gcs_metadata_request=59, gcs_api_client_bad_request_count=0, action_http_put_request=11, op_create_non_recursive=0, gcs_api_client_gone_response_count=0, gs_filesystem_initialize=3, stream_read_vectored_incoming_ranges=0, stream_write_operations=0, gcs_list_dir_request=9, stream_read_operations=0, gcs_api_client_request_timeout_count=0, op_rename=0, op_get_file_status=10, op_glob_status=0, op_exists=9, stream_write_bytes=3009818, op_xattr_list=0, op_get_delegation_token=0, gcs_api_server_unavailable_count=0, directories_created=1, files_delete_rejected=0, stream_read_vectored_combined_ranges=0, op_xattr_get_named=0, gcs_list_file_request=11, op_hsync=0, action_http_get_request=0, stream_read_operations_incomplete=0, op_delete=0, stream_read_bytes=0, gcs_api_client_non_found_response_count=39, op_list_located_status=0, gcs_api_client_requested_range_not_statisfiable_count=0, op_hflush=264, op_list_status=9, stream_read_vectored_read_bytes_discarded=0, op_xattr_get_named_map=0, gcs_api_client_side_error_count=40, op_get_file_checksum=0, gcs_api_server_internal_error_count=0, stream_read_seek_bytes_skipped=0, stream_write_close_operations=0, gcs_get_media_request=0, gcs_connector_time=5443, files_deleted=0, action_http_post_request=23, op_mkdirs=1, gcs_api_client_rate_limit_error_count=0, op_copy_from_local_file=0, gcs_api_server_bad_gateway_count=0, stream_readVectored_range_duration=0, stream_read_seek_backward_operations=0, gcs_api_server_side_error_count=0, write_checksum_failure_count=0, stream_read_seek_operations=0, gcs_get_other_request=10, stream_read_seek_forward_operations=0, gcs_api_client_precondition_failed_response_count=1, op_xattr_get_map=0, delegation_tokens_issued=0, gcs_backoff_time=0, gcs_list_dir_request_min=18, gcs_metadata_request_min=16, op_delete_min=0, op_glob_status_min=0, op_create_non_recursive_min=0, op_hsync_min=0, op_xattr_get_named_min=0, op_xattr_get_named_map_min=0, op_hflush_min=0, op_xattr_list_min=0, action_http_put_request_min=67, op_open_min=0, gcs_list_file_request_min=21, stream_write_close_operations_min=0, op_create_min=89, action_http_delete_request_min=34, op_mkdirs_min=160, op_list_status_min=21, gcs_get_media_request_min=0, stream_readVectored_range_duration_min=0, stream_read_vectored_operations_min=0, stream_read_close_operations_min=0, stream_read_operations_min=0, stream_read_seek_operations_min=0, op_xattr_get_map_min=0, stream_write_operations_min=0, action_http_patch_request_min=0, op_get_file_status_min=89, op_rename_min=0, delegation_tokens_issued_min=0, action_http_post_request_min=34, stream_read_close_operations_max=0, stream_read_seek_operations_max=0, op_hflush_max=614, op_xattr_list_max=0, op_xattr_get_map_max=0, action_http_put_request_max=185, action_http_patch_request_max=0, action_http_post_request_max=276, stream_write_close_operations_max=0, action_http_delete_request_max=75, op_mkdirs_max=160, gcs_get_media_request_max=0, op_rename_max=0, stream_read_vectored_operations_max=0, stream_readVectored_range_duration_max=0, op_xattr_get_named_map_max=0, stream_write_operations_max=0, stream_read_operations_max=0, op_xattr_get_named_max=0, op_glob_status_max=0, op_create_non_recursive_max=0, op_get_file_status_max=420, op_open_max=0, delegation_tokens_issued_max=0, gcs_list_file_request_max=128, gcs_metadata_request_max=116, op_create_max=89, op_delete_max=0, op_list_status_max=35, op_hsync_max=0, gcs_list_dir_request_max=27, op_open_mean=0, op_xattr_list_mean=0, op_rename_mean=0, op_xattr_get_map_mean=0, gcs_list_dir_request_mean=22, op_glob_status_mean=0, stream_read_seek_operations_mean=0, gcs_list_file_request_mean=89, stream_write_operations_mean=0, op_hflush_mean=13, gcs_metadata_request_mean=42, op_list_status_mean=29, stream_read_close_operations_mean=0, op_xattr_get_named_map_mean=0, stream_read_vectored_operations_mean=0, op_mkdirs_mean=160, action_http_post_request_mean=80, stream_write_close_operations_mean=0, action_http_put_request_mean=106, action_http_patch_request_mean=0, op_hsync_mean=0, delegation_tokens_issued_mean=0, action_http_delete_request_mean=47, stream_read_operations_mean=0, op_create_mean=89, op_delete_mean=0, op_create_non_recursive_mean=0, stream_readVectored_range_duration_mean=0, op_xattr_get_named_mean=0, gcs_get_media_request_mean=0, op_get_file_status_mean=141, op_delete_duration=0, op_get_file_status_duration=1413, action_http_put_request_duration=1172, stream_write_operations_duration=0, op_hsync_duration=0, gcs_metadata_request_duration=2488, gcs_get_media_request_duration=0, gcs_list_file_request_duration=982, op_list_status_duration=261, op_mkdirs_duration=160, op_open_duration=0, op_create_duration=89, op_hflush_duration=3520, gcs_list_dir_request_duration=202, op_glob_status_duration=0, stream_read_operations_duration=0, action_http_delete_request_duration=478, action_http_post_request_duration=1856, op_rename_duration=0]
